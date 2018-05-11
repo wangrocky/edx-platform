@@ -594,13 +594,13 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
             var minScore = this.$('#prereq_min_score').val().trim();
             var minCompletion = this.$('#prereq_min_completion').val().trim();
 
-            if (minScore !== '' && !this.isValidPercentage(minScore)) {
+            if (minScore === '' || !this.isValidPercentage(minScore)) {
                 invalidInput = true;
                 this.$('#prereq_min_score_error').show();
             } else {
                 this.$('#prereq_min_score_error').hide();
             }
-            if (minCompletion !== '' && !this.isValidPercentage(minCompletion)) {
+            if (minCompletion === '' || !this.isValidPercentage(minCompletion)) {
                 invalidInput = true;
                 this.$('#prereq_min_completion_error').show();
             } else {
