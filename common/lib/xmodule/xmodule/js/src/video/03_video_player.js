@@ -180,6 +180,7 @@ function(HTML5Video, HTML5HLSVideo, Resizer, HLS, _) {
                     state.el,
                     _.extend({}, commonPlayerConfig, {
                         state: state,
+                        onReadyHLS: onReadyHLS,
                         videoSources: state.HLSVideoSources,
                         canPlayHLS: state.canPlayHLS,
                         HLSOnlySources: state.HLSOnlySources
@@ -559,6 +560,10 @@ function(HTML5Video, HTML5HLSVideo, Resizer, HLS, _) {
 
         this.trigger('videoQualityControl.onQualityChange', quality);
         this.el.trigger('qualitychange', arguments);
+    }
+
+    function onReadyHLS() {
+        dfd.resolve();
     }
 
     function onReady() {
