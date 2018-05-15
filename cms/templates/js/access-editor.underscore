@@ -18,16 +18,18 @@
                     </label>
                 </li>
                 <li id="prereq_min_score_input" class="field field-input input-cosmetic">
-                    <label class="label">
+                    <label for="prereq_min_score">
                         <%- gettext('Minimum Score:') %>
-                        <input type="text" id="prereq_min_score" name="prereq_min_score" class="input input-text percentage" maxlength="3" />
                     </label>
+                    <input type="number" id="prereq_min_score" aria-describedby="msp" class="input input-text percentage" min="0" max="100" />
+                    <span id="msp">%</span>
                 </li>
                 <li id="prereq_min_completion_input" class="field field-input input-cosmetic">
-                    <label class="label">
-                        <%- gettext('Minimum Completion Percentage:') %>
-                        <input type="text" id="prereq_min_completion" name="prereq_min_completion" class="input input-text percentage" maxlength="3" />
+                    <label for="prereq_min_completion">
+                        <%- gettext('Minimum Completion:') %>
                     </label>
+                    <input type="number" id="prereq_min_completion" aria-describedby="mcp" class="input input-text percentage" min="0" max="100" />
+                    <span id="mcp">%</span>
                 </li>
                 <li id="prereq_min_score_error" class="message-status error">
                     <%- gettext('The minimum score percentage must be a whole number between 0 and 100.') %>

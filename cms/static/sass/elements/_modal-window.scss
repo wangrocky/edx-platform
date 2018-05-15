@@ -675,7 +675,9 @@
         }
 
         input.percentage {
-          width: ($baseline*4);
+          display: inline-block;
+          width: ($baseline*3);
+
         }
 
         .tip {
