@@ -376,7 +376,7 @@ def _has_access_course(user, action, courselike):
         'see_about_page': can_see_about_page,
     }
 
-    return _dispatch(checkers, action, user, courselike)
+    return _dispatch(checkers, action, courselike)
 
 
 def _has_access_error_desc(user, action, descriptor, course_key):
@@ -396,7 +396,7 @@ def _has_access_error_desc(user, action, descriptor, course_key):
         'instructor': lambda: _has_instructor_access_to_descriptor(user, descriptor, course_key)
     }
 
-    return _dispatch(checkers, action, user, descriptor)
+    return _dispatch(checkers, action, descriptor)
 
 
 def _has_group_access(descriptor, user, course_key):
@@ -514,7 +514,7 @@ def _has_access_descriptor(user, action, descriptor, course_key=None):
         'instructor': lambda: _has_instructor_access_to_descriptor(user, descriptor, course_key)
     }
 
-    return _dispatch(checkers, action, user, descriptor)
+    return _dispatch(checkers, action, descriptor)
 
 
 def _has_access_xmodule(user, action, xmodule, course_key):
@@ -543,7 +543,7 @@ def _has_access_location(user, action, location, course_key):
         'staff': lambda: _has_staff_access_to_location(user, location, course_key)
     }
 
-    return _dispatch(checkers, action, user, location)
+    return _dispatch(checkers, action, location)
 
 
 def _has_access_course_key(user, action, course_key):
@@ -559,7 +559,7 @@ def _has_access_course_key(user, action, course_key):
         'instructor': lambda: _has_instructor_access_to_location(user, None, course_key),
     }
 
-    return _dispatch(checkers, action, user, course_key)
+    return _dispatch(checkers, action, course_key)
 
 
 def _has_access_string(user, action, perm):
@@ -599,25 +599,19 @@ def _has_access_string(user, action, perm):
         'certificates': check_support,
     }
 
-    return _dispatch(checkers, action, user, perm)
+    return _dispatch(checkers, action, perm)
 
 
 #####  Internal helper methods below
 
-def _dispatch(table, action, user, obj):
+def _dispatch(table, action, obj):
     """
-    Helper: call table[action], raising a nice pretty error if there is no such key.
+    Helper: call table[action], raising an error if there is no such key.
 
-    user and object passed in only for error messages and debugging
+    Object passed in only for error messages.
     """
     if action in table:
-        result = table[action]()
-        debug("%s user %s, object %s, action %s",
-              'ALLOWED' if result else 'DENIED',
-              user,
-              text_type(obj.location) if isinstance(obj, XBlock) else str(obj),
-              action)
-        return result
+        return table[action]()
 
     raise ValueError(u"Unknown action for object type '{0}': '{1}'".format(
         type(obj), action))
