@@ -2006,7 +2006,7 @@ class TestLMSAccountRetirementPost(RetirementTestCase, ModuleStoreTestCase):
         # setup for doing POST from test client
         self.headers = self.build_jwt_headers(self.test_superuser)
         self.headers['content_type'] = "application/json"
-        self.url = reverse('accounts_retire_LMS')
+        self.url = reverse('accounts_retire_misc')
 
     def post_and_assert_status(self, data, expected_status=status.HTTP_204_NO_CONTENT):
         """

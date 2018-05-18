@@ -109,9 +109,9 @@ urlpatterns = [
         name='accounts_retire'
     ),
     url(
-        r'^v1/accounts/retire_LMS/$',
+        r'^v1/accounts/retire_misc/$',
         RETIREMENT_LMS_POST,
-        name='accounts_retire_LMS'
+        name='accounts_retire_misc'
     ),
     url(
         r'^v1/accounts/update_retirement_status/$',
