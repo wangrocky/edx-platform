@@ -2017,6 +2017,11 @@ class TestLMSAccountRetirementPost(RetirementTestCase, ModuleStoreTestCase):
         return response
 
     def test_retire_user(self):
+        # check that rows that will not exist after retirement exist now
+        self.assertTrue(CreditRequest.objects.filter(username=self.test_user.username).exists())
+        self.assertTrue(CreditRequirementStatus.objects.filter(username=self.test_user.username).exists())
+        self.assertTrue(PendingNameChange.objects.filter(user=self.test_user).exists())
+
         retirement = UserRetirementStatus.get_retirement_for_retirement_action(self.test_user.username)
         data = {'username': self.original_username}
         self.post_and_assert_status(data)
